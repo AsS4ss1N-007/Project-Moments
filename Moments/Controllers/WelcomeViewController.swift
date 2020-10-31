@@ -8,6 +8,8 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
+    
+    // MARK :- PROPERTIES
     fileprivate let introImage: UIImageView = {
         let image = UIImageView(image: #imageLiteral(resourceName: "Icons"))
         image.contentMode = .scaleAspectFit
@@ -23,6 +25,7 @@ class WelcomeViewController: UIViewController {
         button.backgroundColor = UIColor(red: 86/255, green: 194/255, blue: 149/255, alpha: 1)
         button.layer.cornerRadius = 10
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
+        button.addTarget(self, action: #selector(showHomeVC), for: .touchUpInside)
         return button
     }()
     
@@ -36,6 +39,7 @@ class WelcomeViewController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.darkGray.cgColor
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
+        button.addTarget(self, action: #selector(showHomeVC), for: .touchUpInside)
         return button
     }()
     
@@ -44,8 +48,11 @@ class WelcomeViewController: UIViewController {
         configureUI()
     }
     
+    // MARK :- Layouts
+    
     func configureUI(){
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = true
         signInButtonLayout()
         signUpButtonLayout()
         introImageLayout()
@@ -73,6 +80,12 @@ class WelcomeViewController: UIViewController {
         signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    // MARK :- BUTTON TARGETS
+    
+    @objc func showHomeVC(){
+        dismiss(animated: true, completion: nil)
     }
     
     
